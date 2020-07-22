@@ -35,9 +35,13 @@ void ATankAIController::Tick(float DeltaTime) {
 	Super::Tick(DeltaTime);
 
 	if (GetPlayerTank()) {
-		auto AITank = GetControlledTank(); // to remove 
+		auto AITank = GetControlledTank(); // to remove :)
 
-		FVector AIHitLocation;
-		AITank->AimAt(AIHitLocation);
+		// TODO Move towards the player
+
+		// Aim towards the player
+		AITank->AimAt(GetPlayerTank()->GetActorLocation());
+
+		// Fire if ready
 	}
 };
