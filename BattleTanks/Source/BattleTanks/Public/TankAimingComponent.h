@@ -21,6 +21,8 @@ public:
 
 	void AimAt(FVector HitLocation, float LaunchSpeed);
 
+	void MoveBarrelTowards(FVector AimDirection);
+
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
