@@ -2,6 +2,12 @@
 
 
 #include "TankBarrel.h"
+#include "UObject/ConstructorHelpers.h"
+
+UTankBarrel::UTankBarrel()
+{
+
+}
 
 void UTankBarrel::Elevate(float DegreesPerSecond) {
 	// Move the barrel the right amount this frame
