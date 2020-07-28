@@ -26,11 +26,12 @@ void UTankAimingComponent::BeginPlay()
 	
 }
 
-void UTankAimingComponent::AimAt(FVector HitLocation)
+void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 {
-	auto OurTankName = GetOwner()->GetName();
-	auto ThisBarrel = Barrel->GetComponentLocation().ToString();
-	UE_LOG(LogTemp, Warning, TEXT("%s aiming at: %s from %s"), *OurTankName, *HitLocation.ToString(), *ThisBarrel);
+	//auto OurTankName = GetOwner()->GetName();
+	//auto ThisBarrel = Barrel->GetComponentLocation().ToString();
+	//UE_LOG(LogTemp, Warning, TEXT("%s aiming at: %s from %s"), *OurTankName, *HitLocation.ToString(), *ThisBarrel);
+	UE_LOG(LogTemp, Warning, TEXT("Firing at speed: %f"), LaunchSpeed);
 }
 
 // Called every frame
