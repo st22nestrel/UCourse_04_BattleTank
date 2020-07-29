@@ -21,5 +21,5 @@ void UTankBarrel::Elevate(float RelativeSpeed) {
 
 	SetRelativeRotation(FRotator(PitchRestrict, 0, 0));
 
-	//UE_LOG(LogTemp, Warning, TEXT("Barrel->Elevate() called at speed %f"), RelativeSpeed);
+	UE_LOG(LogTemp, Warning, TEXT("Barrel->Elevate() called at speed %f"), RelativeSpeed);
 }
