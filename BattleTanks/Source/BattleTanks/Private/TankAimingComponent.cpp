@@ -38,13 +38,18 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 		OutLaunchVelocity,
 		StartLocation,
 		HitLocation,
-		LaunchSpeed, // next 3 values are set by default as we need
+		LaunchSpeed, // next 3 values sadly must be there to prevent bug
+		false,
+		0,
+		0,
 		ESuggestProjVelocityTraceOption::DoNotTrace
 	);
 	//Calculate the OutLaunchVelocity
 	if (bHasAimSolution)
 	{
 		auto AimDirection = OutLaunchVelocity.GetSafeNormal(); //FVector
+		auto Time = GetWorld()->GetTimeSeconds();
+		UE_LOG(LogTemp, Warning, TEXT("%f: aim solve found"), Time)
 		MoveBarrelTowards(AimDirection);
 		
 	}
