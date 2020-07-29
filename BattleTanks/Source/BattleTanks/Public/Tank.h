@@ -26,6 +26,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Setup)
 	void SetTurretReference(UTankTurret* TurretToSet);
 
+	UFUNCTION(BlueprintCallable) //, Category = Firing -- not needed in newer Unreal versions
+	void Fire();
+
 	void AimAt(FVector HitLocation);
 
 protected:

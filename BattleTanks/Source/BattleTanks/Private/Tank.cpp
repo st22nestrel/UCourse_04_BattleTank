@@ -22,6 +22,12 @@ void ATank::SetTurretReference(UTankTurret* TurretToSet) {
 	TankAimingComponent->SetTurretReference(TurretToSet);
 }
 
+void ATank::Fire() {
+	// if we wanteted to keep firing while LMB is pressed, we could make loop inside tick, and this method would just
+	// set bolean value on call + another method would set bolean value to false
+	UE_LOG(LogTemp, Warning, TEXT("Feuer frei"));
+}
+
 void ATank::AimAt(FVector HitLocation)
 {
 	TankAimingComponent->AimAt(HitLocation, LaunchSpeed);

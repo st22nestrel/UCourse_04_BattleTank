@@ -12,5 +12,5 @@ void UTankTurret::Rotate(float RelativeSpeed) {
 	auto RawNewRotation = GetRelativeRotation().Yaw + RotationChange;
 
 	SetRelativeRotation(FRotator(0, RawNewRotation, 0));
-	UE_LOG(LogTemp, Warning, TEXT("Turret->Rotate() called at speed %f"), RelativeSpeed);
+	//UE_LOG(LogTemp, Warning, TEXT("Turret->Rotate() called at speed %f"), RelativeSpeed);
 }
