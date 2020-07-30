@@ -2,6 +2,8 @@
 
 
 #include "Tank.h"
+#include "TankBarrel.h"
+#include "Projectile.h"
 #include "TankAimingComponent.h"
 
 // Sets default values
@@ -16,6 +18,7 @@ ATank::ATank()
 
 void ATank::SetBarrelReference(UTankBarrel* BarrelToSet) {
 	TankAimingComponent->SetBarrelReference(BarrelToSet);
+	Barrel = BarrelToSet;
 }
 
 void ATank::SetTurretReference(UTankTurret* TurretToSet) {
@@ -26,6 +29,15 @@ void ATank::Fire() {
 	// if we wanteted to keep firing while LMB is pressed, we could make loop inside tick, and this method would just
 	// set bolean value on call + another method would set bolean value to false
 	UE_LOG(LogTemp, Warning, TEXT("Feuer frei"));
+
+	if (!Barrel) return;
+
+	// Spawn projectile at the socket location
+	GetWorld()->SpawnActor<AProjectile>(
+		ProjectileBlueprint,
+		Barrel->GetSocketLocation(FName("Projectile")),
+		Barrel->GetSocketRotation(FName("Projectile"))
+		);
 }
 
 void ATank::AimAt(FVector HitLocation)
