@@ -33,11 +33,13 @@ void ATank::Fire() {
 	if (!Barrel) return;
 
 	// Spawn projectile at the socket location
-	/*GetWorld()->SpawnActor<AProjectile>(
+	auto Projectile = GetWorld()->SpawnActor<AProjectile>(
 		ProjectileBlueprint,
 		Barrel->GetSocketLocation(FName("Projectile")),
 		Barrel->GetSocketRotation(FName("Projectile"))
-		);*/
+		);
+
+	Projectile->LaunchProjectile(LaunchSpeed);
 }
 
 // TODO maybe find a way to asign this just via blueprint

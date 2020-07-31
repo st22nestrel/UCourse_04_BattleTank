@@ -55,4 +55,5 @@ public:
 
 	// Local barrel reference for spawning projectile
 	UTankBarrel* Barrel = nullptr;
+	//UProjectile* Barrel = nullptr;
 };
