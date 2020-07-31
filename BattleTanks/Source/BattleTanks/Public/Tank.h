@@ -45,10 +45,10 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
-	UPROPERTY(EditAnywhere, Category = Firing)
+	UPROPERTY(EditDefaultsOnly, Category = Firing)
 	float LaunchSpeed = 4000.0; // TODO find sensible default
 
-	UPROPERTY(EditAnywhere, Category = Projectile)
+	UPROPERTY(EditDefaultsOnly, Category = Projectile)
 	TSubclassOf<AProjectile> ProjectileBlueprint;
 
 	bool bAimLocked = false;
