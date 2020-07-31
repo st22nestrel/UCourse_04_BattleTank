@@ -30,6 +30,9 @@ public:
 	UFUNCTION(BlueprintCallable) //, Category = Firing -- not needed in newer Unreal versions
 	void Fire();
 
+	UFUNCTION(BlueprintCallable)
+	void AimLock();
+
 	void AimAt(FVector HitLocation);
 
 protected:
@@ -47,6 +50,8 @@ public:
 
 	UPROPERTY(EditAnywhere, Category = Projectile)
 	TSubclassOf<AProjectile> ProjectileBlueprint;
+
+	bool bAimLocked = false;
 
 	// Local barrel reference for spawning projectile
 	UTankBarrel* Barrel = nullptr;

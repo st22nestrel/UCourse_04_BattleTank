@@ -40,9 +40,16 @@ void ATank::Fire() {
 		);*/
 }
 
+// TODO maybe find a way to asign this just via blueprint
+void ATank::AimLock() {
+	bAimLocked = !bAimLocked;
+}
+
 void ATank::AimAt(FVector HitLocation)
 {
-	TankAimingComponent->AimAt(HitLocation, LaunchSpeed);
+	if (!bAimLocked) {
+		TankAimingComponent->AimAt(HitLocation, LaunchSpeed);
+	}
 }
 
 // Called when the game starts or when spawned
