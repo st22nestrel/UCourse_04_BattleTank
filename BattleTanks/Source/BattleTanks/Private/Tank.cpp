@@ -26,20 +26,21 @@ void ATank::SetTurretReference(UTankTurret* TurretToSet) {
 }
 
 void ATank::Fire() {
-	// if we wanteted to keep firing while LMB is pressed, we could make loop inside tick, and this method would just
-	// set bolean value on call + another method would set bolean value to false
-	UE_LOG(LogTemp, Warning, TEXT("Feuer frei"));
 
 	if (!Barrel) return;
-
-	// Spawn projectile at the socket location
-	auto Projectile = GetWorld()->SpawnActor<AProjectile>(
-		ProjectileBlueprint,
-		Barrel->GetSocketLocation(FName("Projectile")),
-		Barrel->GetSocketRotation(FName("Projectile"))
-		);
-
-	Projectile->LaunchProjectile(LaunchSpeed);
+	bool isReloaded = (GetWorld()->GetTimeSeconds() - LastFireTime) > ReloadTime;
+	
+	if (isReloaded) {
+		// Spawn projectile at the socket location
+		auto Projectile = GetWorld()->SpawnActor<AProjectile>(
+			ProjectileBlueprint,
+			Barrel->GetSocketLocation(FName("Projectile")),
+			Barrel->GetSocketRotation(FName("Projectile"))
+			);
+		UE_LOG(LogTemp, Warning, TEXT("Feuer frei"));
+		Projectile->LaunchProjectile(LaunchSpeed);
+		LastFireTime = GetWorld()->GetTimeSeconds();
+	}
 }
 
 // TODO maybe find a way to asign this just via blueprint
