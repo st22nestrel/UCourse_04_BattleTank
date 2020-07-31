@@ -55,14 +55,19 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 	if (bHasAimSolution)
 	{
 		auto AimDirection = OutLaunchVelocity.GetSafeNormal(); //FVector
+	
 		auto Time = GetWorld()->GetTimeSeconds();
 		//UE_LOG(LogTemp, Warning, TEXT("%f: aim solve found"), Time)
 		MoveBarrelTowards(AimDirection);
 		
 	}
+	// I want to rotate turret no matter if I am to able to hit
+	// thing I am aiming at -- not working, bHasAimSolution always returns true
 	else {
-		auto Time = GetWorld()->GetTimeSeconds();
-		//UE_LOG(LogTemp, Warning, TEXT("%f: No aim solve found"), Time)
+		/*UE_LOG(LogTemp, Warning, TEXT("%s: Boool"), *OutLaunchVelocity.ToString());
+		auto AimDirection = OutLaunchVelocity.GetSafeNormal(); //FVector
+		UE_LOG(LogTemp, Warning, TEXT("%s: aim solve not found"), *AimDirection.ToString());
+		MoveBarrelTowards(AimDirection);*/
 	}
 	
 	//if no solution found do nothing
@@ -72,6 +77,12 @@ void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection) {
 	FRotator BarrelRotator = Barrel->GetForwardVector().Rotation();
 	FRotator AimAsRotator = AimDirection.Rotation();
 	FRotator DeltaRotator = AimAsRotator - BarrelRotator;
+	// Reverse yaw when rotating turret backwards
+	if (DeltaRotator.Yaw < -180 || DeltaRotator.Yaw > 180) {
+		DeltaRotator.Yaw = -DeltaRotator.Yaw;
+		//UE_LOG(LogTemp, Warning, TEXT("Ci Pana"));
+	}
+	//UE_LOG(LogTemp, Warning, TEXT("DeltaYaw: %f, AimDirectionYaw: %f, TurretYaw: "), DeltaRotator.Yaw, AimAsRotator.Yaw);
 
 	Barrel->Elevate(DeltaRotator.Pitch);
 	if (!Turret) return;

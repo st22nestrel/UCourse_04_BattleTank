@@ -33,11 +33,11 @@ void ATank::Fire() {
 	if (!Barrel) return;
 
 	// Spawn projectile at the socket location
-	GetWorld()->SpawnActor<AProjectile>(
+	/*GetWorld()->SpawnActor<AProjectile>(
 		ProjectileBlueprint,
 		Barrel->GetSocketLocation(FName("Projectile")),
 		Barrel->GetSocketRotation(FName("Projectile"))
-		);
+		);*/
 }
 
 void ATank::AimAt(FVector HitLocation)
