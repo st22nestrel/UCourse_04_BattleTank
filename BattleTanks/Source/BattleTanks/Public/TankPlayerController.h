@@ -17,11 +17,13 @@ class BATTLETANKS_API ATankPlayerController : public APlayerController
 	GENERATED_BODY()
 	
 public:
-	ATank* GetControlledTank() const;
-
 	virtual void BeginPlay() override; // virtual enables children of given class to be overriden
 
 	virtual void Tick(float DeltaTime) override;
+
+protected:
+	UFUNCTION(BlueprintCallable, Category = Setup)
+	ATank* GetControlledTank() const;
 
 private:
 	// Start the tank moving the barrel so that a shot would hit where
