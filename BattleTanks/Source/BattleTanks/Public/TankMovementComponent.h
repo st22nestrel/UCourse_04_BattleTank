@@ -22,6 +22,15 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void IntendMoveForward(float Throw);
 
+	UFUNCTION(BlueprintCallable)
+	void IntendMoveBackward(float Throw);
+
+	UFUNCTION(BlueprintCallable)
+	void IntendMoveReverseRight(float Throw);
+
+	UFUNCTION(BlueprintCallable)
+	void IntendMoveReverseLeft(float Throw);
+
 private:
 	UTankTrack* LTrack = nullptr;
 	UTankTrack* RTrack = nullptr;

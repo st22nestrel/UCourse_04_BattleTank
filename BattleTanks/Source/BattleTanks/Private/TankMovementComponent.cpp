@@ -12,9 +12,35 @@ void UTankMovementComponent::Initialise(UTankTrack* LTrackToSet, UTankTrack* RTr
 }
 
 void UTankMovementComponent::IntendMoveForward(float Throw) {
-	UE_LOG(LogTemp, Warning, TEXT("Throw: %f"), Throw);
+	//UE_LOG(LogTemp, Warning, TEXT("Throw: %f"), Throw);
 
 	LTrack->SetThrottle(Throw);
+	RTrack->SetThrottle(Throw);
+	// TODO prevent double-speed due to dual control use //gamepad!
+}
+
+void UTankMovementComponent::IntendMoveBackward(float Throw) {
+	//UE_LOG(LogTemp, Warning, TEXT("Throw: %f"), Throw);
+
+	LTrack->SetThrottle(Throw);
+	RTrack->SetThrottle(Throw);
+	// TODO prevent double-speed due to dual control use //gamepad!
+}
+
+void UTankMovementComponent::IntendMoveReverseRight(float Throw) {
+	//UE_LOG(LogTemp, Warning, TEXT("Throw: %f"), Throw);
+	Throw = Throw * 2;
+
+	LTrack->SetThrottle(Throw);
+	RTrack->SetThrottle(-Throw);
+	// TODO prevent double-speed due to dual control use //gamepad!
+}
+
+void UTankMovementComponent::IntendMoveReverseLeft(float Throw) {
+	//UE_LOG(LogTemp, Warning, TEXT("Throw: %f"), Throw);
+	Throw = Throw * 2;
+
+	LTrack->SetThrottle(-Throw);
 	RTrack->SetThrottle(Throw);
 	// TODO prevent double-speed due to dual control use //gamepad!
 }
