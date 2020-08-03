@@ -20,7 +20,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Input)
 	void SetThrottle(float Throttle);
 
+	// TODO always assign phys material in collision via BP, cause...
+	// + TODO make tank just one box collision rather
 	UPROPERTY(EditDefaultsOnly)
-	float TrackMaxDrivingForce = 60000000; // Assume 40 tonne tank, and 1g accelleration
+	float TrackMaxDrivingForce = 40000000; // Assume 40 tonne tank, and 1g accelleration
 
 };

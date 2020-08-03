@@ -11,6 +11,20 @@ void UTankMovementComponent::Initialise(UTankTrack* LTrackToSet, UTankTrack* RTr
 	RTrack = RTrackToSet;
 }
 
+// I assume that this function is called with MoveToActor() in TankAIController.cpp
+void UTankMovementComponent::RequestDirectMove(const FVector& MoveVelocity, bool bForceMaxSpeed) {
+	
+	// No need to call Super as we're replacing the functionality
+	auto TankName = GetOwner()->GetName();
+	auto MoveVelocityString = MoveVelocity.ToString();
+
+	UE_LOG(LogTemp, Warning, TEXT("%s vectoring to %s"), *TankName, *MoveVelocityString);
+};
+
+//////////////////////
+// Intend move methods
+//////////////////////
+
 void UTankMovementComponent::IntendMoveForward(float Throw) {
 	//UE_LOG(LogTemp, Warning, TEXT("Throw: %f"), Throw);
 
