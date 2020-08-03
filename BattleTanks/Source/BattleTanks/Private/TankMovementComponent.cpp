@@ -20,6 +20,10 @@ void UTankMovementComponent::RequestDirectMove(const FVector& MoveVelocity, bool
 
 	//UE_LOG(LogTemp, Warning, TEXT("%s vectoring to %s"), *TankName, *MoveVelocityString);
 	IntendMoveForward( FVector::DotProduct(TankForward, AIForwardIntetion) );
+	
+	FVector MoveAndRotate = FVector::CrossProduct(TankForward, AIForwardIntetion);
+	IntendMoveReverseRight(MoveAndRotate.Z);
+
 };
 
 //////////////////////
