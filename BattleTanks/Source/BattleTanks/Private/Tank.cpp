@@ -40,6 +40,8 @@ void ATank::AimLock() {
 
 void ATank::AimAt(FVector HitLocation)
 {
+	if (!TankAimingComponent) return;
+
 	if (!bAimLocked) {
 		TankAimingComponent->AimAt(HitLocation, LaunchSpeed);
 	}
