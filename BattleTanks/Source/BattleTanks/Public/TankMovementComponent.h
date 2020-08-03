@@ -16,9 +16,8 @@ class BATTLETANKS_API UTankMovementComponent : public UNavMovementComponent
 	GENERATED_BODY()
 	
 public:
-	virtual void RequestDirectMove(const FVector& MoveVelocity, bool bForceMaxSpeed) override;
-
-	UFUNCTION(BluePrintCallable, Category = Setup)
+	// Category in string " " prevents weird bugs
+	UFUNCTION(BluePrintCallable, Category = "Setup")
 	void Initialise(UTankTrack* LTrackToSet, UTankTrack* RTrackToSet);
 
 	UFUNCTION(BlueprintCallable)
@@ -34,6 +33,9 @@ public:
 	void IntendMoveReverseLeft(float Throw);
 
 private:
+	// Called from the pathfinding logic by the AI controllers
+	virtual void RequestDirectMove(const FVector& MoveVelocity, bool bForceMaxSpeed) override;
+
 	UTankTrack* LTrack = nullptr;
 	UTankTrack* RTrack = nullptr;
 
