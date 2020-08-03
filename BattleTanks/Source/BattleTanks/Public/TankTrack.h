@@ -17,7 +17,7 @@ class BATTLETANKS_API UTankTrack : public UStaticMeshComponent
 public:
 	UTankTrack();
 
-	UFUNCTION(BlueprintCallable, Category = Input)
+	UFUNCTION(BlueprintCallable, Category = "Input")
 	void SetThrottle(float Throttle);
 
 	// TODO always assign phys material in collision via BP, cause...
