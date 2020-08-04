@@ -13,6 +13,10 @@ UTankAimingComponent::UTankAimingComponent()
 	// off to improve performance if you don't need them.
 	PrimaryComponentTick.bCanEverTick = false; 
 
+	///////////////////////////////////////////////////////////////////////////
+	//static ConstructorHelpers::FObjectFinder<AProjectile>Projectile_BP(TEXT("/Game/Blueprints/Projectile_BP"));
+	//rojectileBlueprint = *Projectile_BP.Object;
+
 	// ...
 }
 
@@ -31,7 +35,7 @@ void UTankAimingComponent::BeginPlay()
 	
 }
 
-void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
+void UTankAimingComponent::AimAt(FVector HitLocation)
 {
 		if (!ensure(Barrel)) return; //nullptr protection
 		//UE_LOG(LogTemp, Warning, TEXT("I'm HERE!"))
@@ -106,7 +110,7 @@ void UTankAimingComponent::Fire() {
 			Barrel->GetSocketRotation(FName("Projectile"))
 			);
 		UE_LOG(LogTemp, Warning, TEXT("Feuer frei"));
-		Projectile->LaunchProjectile(LaunchSpeed2);
+		Projectile->LaunchProjectile(LaunchSpeed);
 		LastFireTime = GetWorld()->GetTimeSeconds();
 	}
 }

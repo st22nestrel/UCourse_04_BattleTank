@@ -27,7 +27,4 @@ private:
 	float AcceptanceRadius = 3000; //cm?
 
 	UTankAimingComponent* AimingComponent = nullptr;
-
-	UPROPERTY(EditDefaultsOnly, Category = "Firing")
-	float LaunchSpeed = 4000.0; // TODO find sensible default
 };

@@ -36,7 +36,7 @@ public:
 	// Sets default values for this component's properties
 	UTankAimingComponent();
 
-	void AimAt(FVector HitLocation, float LaunchSpeed);
+	void AimAt(FVector HitLocation);
 
 	void MoveBarrelTowards(FVector AimDirection);
 
@@ -54,16 +54,15 @@ private:
 
 	bool isReloaded;
 
-	// TODO Remove once firing is moved to aiming component
 	UPROPERTY(EditDefaultsOnly, Category = "Firing")
-	float LaunchSpeed2 = 4000.0; // TODO find sensible default
+	float LaunchSpeed = 4000.0; // TODO find sensible default
 
 	float LastFireTime = 0;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Firing")
 	float ReloadTime = 3;
 
-	// Don't forget to set this projectile in BP properties
+	// Don't forget to set this projectile in BP properties, or find a way to set it via cpp constructor :(
 	UPROPERTY(EditDefaultsOnly, Category = "Projectile")
 	TSubclassOf<AProjectile> ProjectileBlueprint;
 };
