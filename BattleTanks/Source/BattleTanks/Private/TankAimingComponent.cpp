@@ -34,45 +34,46 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 {
 	
 		if (!ensure(Barrel)) return; //nullptr protection
-		UE_LOG(LogTemp, Warning, TEXT("I'm HERE!"))
+		//UE_LOG(LogTemp, Warning, TEXT("I'm HERE!"))
 
-		FVector OutLaunchVelocity;
-		FVector StartLocation = Barrel->GetSocketLocation(FName("Projectile"));
-		bool bHasAimSolution = UGameplayStatics::SuggestProjectileVelocity(
-			this,
-			OutLaunchVelocity,
-			StartLocation,
-			HitLocation,
-			LaunchSpeed, // next 3 values sadly must be there to prevent bug
-			false,
-			0,
-			0,
-			ESuggestProjVelocityTraceOption::DoNotTrace
-		);
-		//Calculate the OutLaunchVelocity
-		//UE_LOG(LogTemp, Warning, TEXT("Bool value is: %d"), bHasAimSolution ? 1 : 0);
-		if (bHasAimSolution)
-		{
-			auto AimDirection = OutLaunchVelocity.GetSafeNormal(); //FVector
 
-			auto Time = GetWorld()->GetTimeSeconds();
-			//UE_LOG(LogTemp, Warning, TEXT("%f: aim solve found"), Time)
-			MoveBarrelTowards(AimDirection);
+			FVector OutLaunchVelocity;
+			FVector StartLocation = Barrel->GetSocketLocation(FName("Projectile"));
+			bool bHasAimSolution = UGameplayStatics::SuggestProjectileVelocity(
+				this,
+				OutLaunchVelocity,
+				StartLocation,
+				HitLocation,
+				LaunchSpeed, // next 3 values sadly must be there to prevent bug
+				false,
+				0,
+				0,
+				ESuggestProjVelocityTraceOption::DoNotTrace
+			);
+			//Calculate the OutLaunchVelocity
+			//UE_LOG(LogTemp, Warning, TEXT("Bool value is: %d"), bHasAimSolution ? 1 : 0);
+			if (bHasAimSolution)
+			{
+				auto AimDirection = OutLaunchVelocity.GetSafeNormal(); //FVector
 
-		}
+				auto Time = GetWorld()->GetTimeSeconds();
+				//UE_LOG(LogTemp, Warning, TEXT("%f: aim solve found"), Time)
+				MoveBarrelTowards(AimDirection);
 
-		/// TODO this + fix aim flickering
-		// I want to rotate turret no matter if I am to able to hit
-		// thing I am aiming at -- not working, bHasAimSolution always returns true
-		else {
-			/*UE_LOG(LogTemp, Warning, TEXT("%s: Boool"), *OutLaunchVelocity.ToString());
-			auto AimDirection = OutLaunchVelocity.GetSafeNormal(); //FVector
-			UE_LOG(LogTemp, Warning, TEXT("%s: aim solve not found"), *AimDirection.ToString());
-			MoveBarrelTowards(AimDirection);*/
-		}
+			}
 
-		//if no solution found do nothing
-	
+			/// TODO this + fix aim flickering
+			// I want to rotate turret no matter if I am to able to hit
+			// thing I am aiming at -- not working, bHasAimSolution always returns true
+			else {
+				/*UE_LOG(LogTemp, Warning, TEXT("%s: Boool"), *OutLaunchVelocity.ToString());
+				auto AimDirection = OutLaunchVelocity.GetSafeNormal(); //FVector
+				UE_LOG(LogTemp, Warning, TEXT("%s: aim solve not found"), *AimDirection.ToString());
+				MoveBarrelTowards(AimDirection);*/
+			}
+
+			//if no solution found do nothing
+
 }
 
 void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection) {

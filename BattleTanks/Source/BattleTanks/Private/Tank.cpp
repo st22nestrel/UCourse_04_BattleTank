@@ -36,19 +36,6 @@ void ATank::Fire() {
 	}
 }
 
-// TODO maybe find a way to asign this just via blueprint
-void ATank::AimLock() {
-	bAimLocked = !bAimLocked;
-}
-
-void ATank::AimAt(FVector HitLocation)
-{
-	if (!ensure(TankAimingComponent)) return;
-
-	if (!bAimLocked) {
-		TankAimingComponent->AimAt(HitLocation, LaunchSpeed);
-	}
-}
 
 // Called when the game starts or when spawned
 void ATank::BeginPlay()
@@ -58,7 +45,6 @@ void ATank::BeginPlay()
 	auto TankName = GetName();
 	UE_LOG(LogTemp, Warning, TEXT("%s DONKEY: Tank C++ Begin Play"), *TankName);
 
-	TankAimingComponent = FindComponentByClass<UTankAimingComponent>();
 }
 
 // Called to bind functionality to input

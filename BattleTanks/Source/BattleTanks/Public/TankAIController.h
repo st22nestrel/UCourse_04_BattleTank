@@ -10,6 +10,7 @@
  * 
  */
 class ATank;
+class UTankAimingComponent;
 
 UCLASS()
 class BATTLETANKS_API ATankAIController : public AAIController
@@ -19,7 +20,14 @@ class BATTLETANKS_API ATankAIController : public AAIController
 public:
 	virtual void Tick(float DeltaTime) override;
 
+	virtual void BeginPlay() override;
+
 private:
 	// How close can the AI tank get
 	float AcceptanceRadius = 3000; //cm?
+
+	UTankAimingComponent* AimingComponent = nullptr;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Firing")
+	float LaunchSpeed = 4000.0; // TODO find sensible default
 };

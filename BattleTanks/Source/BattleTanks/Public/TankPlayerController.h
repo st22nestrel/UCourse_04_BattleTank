@@ -29,6 +29,9 @@ protected:
 	UFUNCTION(BlueprintImplementableEvent, Category = "Setup")
 	void FoundAimingComponent(UTankAimingComponent* AimCompRef);
 
+	UFUNCTION(BlueprintCallable)
+	void AimLock();
+
 private:
 	// Start the tank moving the barrel so that a shot would hit where
 	// the crosshair intersects the world
@@ -48,5 +51,13 @@ private:
 	bool GetLookDirection(FVector2D ScreenLocation, FVector& LookDirection) const;
 
 	bool GetLookVectorHitLocation(FVector LookDirection, FVector& OutHitLocation) const;
+
+	UTankAimingComponent* AimingComponent = nullptr;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Firing")
+	float LaunchSpeed = 4000.0; // TODO find sensible default
 	//FVector2D ScreenLocation;
+
+	// Used for locking turret rotation via RMB
+	bool bAimLocked = false;
 };
