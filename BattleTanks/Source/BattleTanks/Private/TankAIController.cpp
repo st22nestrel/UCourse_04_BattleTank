@@ -8,10 +8,9 @@ void ATankAIController::Tick(float DeltaTime) {
 	Super::Tick(DeltaTime);
 
 	auto PlayerTank = GetWorld()->GetFirstPlayerController()->GetPawn();
-	if (PlayerTank) {
+	if (ensure(PlayerTank)) {
 		auto AITank = Cast<ATank>(GetPawn());
-		if (!AITank) {
-			UE_LOG(LogTemp, Warning, TEXT("AIPlayerController not possesing a tank"));
+		if (!ensure(AITank)) {
 			return;
 		}
 		// Move towards the player

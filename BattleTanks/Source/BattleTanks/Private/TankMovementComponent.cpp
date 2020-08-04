@@ -6,7 +6,7 @@
 
 void UTankMovementComponent::Initialise(UTankTrack* LTrackToSet, UTankTrack* RTrackToSet) {
 
-	if (!LTrackToSet || !RTrackToSet) return;
+	if (!ensure(LTrackToSet && RTrackToSet)) return;
 	LTrack = LTrackToSet;
 	RTrack = RTrackToSet;
 }
