@@ -45,8 +45,12 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	// TODO Remove once firing is moved to aiming component
 	UPROPERTY(EditDefaultsOnly, Category = "Firing")
 	float LaunchSpeed = 4000.0; // TODO find sensible default
+
+	UPROPERTY(EditDefaultsOnly, Category = "Firing")
+	float ReloadTime = 3;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Projectile")
 	TSubclassOf<AProjectile> ProjectileBlueprint;
@@ -56,7 +60,5 @@ public:
 	// Local barrel reference for spawning projectile
 	UTankBarrel* Barrel = nullptr;
 	
-	float ReloadTime = 3;
-
 	float LastFireTime = 0;
 };
