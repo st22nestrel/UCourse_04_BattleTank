@@ -18,6 +18,7 @@ enum class EFiringStatus : uint8
 // Forward declaration
 class UTankBarrel;
 class UTankTurret;
+class AProjectile;
 
 // Holds barrel's properties
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
@@ -28,6 +29,9 @@ class BATTLETANKS_API UTankAimingComponent : public UActorComponent
 public:	
 	UFUNCTION(BluePrintCallable, Category = "Setup")
 	void Initialise(UTankBarrel* BarrelToSet, UTankTurret* TurretToSet);
+
+	UFUNCTION(BlueprintCallable) //, Category = Firing -- not needed in newer Unreal versions
+	void Fire();
 
 	// Sets default values for this component's properties
 	UTankAimingComponent();
@@ -47,4 +51,19 @@ private:
 	UTankBarrel* Barrel = nullptr;
 
 	UTankTurret* Turret = nullptr;
+
+	bool isReloaded;
+
+	// TODO Remove once firing is moved to aiming component
+	UPROPERTY(EditDefaultsOnly, Category = "Firing")
+	float LaunchSpeed2 = 4000.0; // TODO find sensible default
+
+	float LastFireTime = 0;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Firing")
+	float ReloadTime = 3;
+
+	// Don't forget to set this projectile in BP properties
+	UPROPERTY(EditDefaultsOnly, Category = "Projectile")
+	TSubclassOf<AProjectile> ProjectileBlueprint;
 };

@@ -28,7 +28,7 @@ void ATankAIController::Tick(float DeltaTime) {
 		AimingComponent->AimAt(PlayerTank->GetActorLocation(), LaunchSpeed);
 
 		// Fire if ready
-		AITank->Fire();
+		AimingComponent->Fire();
 	}
 	else
 		UE_LOG(LogTemp, Warning, TEXT("AIPlayerController could not find the player"));

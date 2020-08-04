@@ -22,9 +22,6 @@ public:
 	// Sets default values for this pawn's properties
 	ATank();
 
-	UFUNCTION(BlueprintCallable) //, Category = Firing -- not needed in newer Unreal versions
-	void Fire();
-
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -37,20 +34,4 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
-	// TODO Remove once firing is moved to aiming component
-	UPROPERTY(EditDefaultsOnly, Category = "Firing")
-	float LaunchSpeed = 4000.0; // TODO find sensible default
-
-	UPROPERTY(EditDefaultsOnly, Category = "Firing")
-	float ReloadTime = 3;
-
-	UPROPERTY(EditDefaultsOnly, Category = "Projectile")
-	TSubclassOf<AProjectile> ProjectileBlueprint;
-
-	bool bAimLocked = false;
-
-	// Local barrel reference for spawning projectile
-	UTankBarrel* Barrel = nullptr;
-	
-	float LastFireTime = 0;
 };
