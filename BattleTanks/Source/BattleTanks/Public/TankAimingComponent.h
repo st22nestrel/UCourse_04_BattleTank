@@ -68,5 +68,9 @@ private:
 	UPROPERTY(EditDefaultsOnly, Category = "Projectile")
 	TSubclassOf<AProjectile> ProjectileBlueprint; // TODO set projectile via constructionScript
 
+	// Barel firing status
+	bool IsBarrelMoving();
+
+	FVector ThisAimDirection;
 	
 };
