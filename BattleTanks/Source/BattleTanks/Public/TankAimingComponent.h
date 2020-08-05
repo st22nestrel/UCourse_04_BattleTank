@@ -64,5 +64,7 @@ private:
 
 	// Don't forget to set this projectile in BP properties, or find a way to set it via cpp constructor :(
 	UPROPERTY(EditDefaultsOnly, Category = "Projectile")
-	TSubclassOf<AProjectile> ProjectileBlueprint;
+	TSubclassOf<AProjectile> ProjectileBlueprint; // TODO set projectile via constructionScript
+
+	
 };

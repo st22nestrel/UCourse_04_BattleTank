@@ -2,13 +2,12 @@
 
 
 #include "TankPlayerController.h"
-#include "Tank.h"
 #include "TankAimingComponent.h"
 
 void ATankPlayerController::BeginPlay(){
 	Super::BeginPlay();
 
-	AimingComponent = GetControlledTank()->FindComponentByClass<UTankAimingComponent>();
+	AimingComponent = GetPawn()->FindComponentByClass<UTankAimingComponent>();
 	if (AimingComponent)
 	{
 		FoundAimingComponent(AimingComponent);
@@ -23,9 +22,6 @@ void ATankPlayerController::Tick(float DeltaTime) {
 	//UE_LOG(LogTemp, Warning, TEXT("Ticking"));
 }
 
-ATank* ATankPlayerController::GetControlledTank() const {
-	return Cast<ATank>(GetPawn());
-}
 
 // TODO maybe find a way to asign this just via blueprint
 void ATankPlayerController::AimLock() {
@@ -33,7 +29,7 @@ void ATankPlayerController::AimLock() {
 }
 
 void ATankPlayerController::AimTowardsCrosshair() {
-	if ( !ensure(GetControlledTank()) ) return;
+	if ( !ensure(GetPawn()) ) return;
 	
 	if (!bAimLocked) {
 		FVector HitLocation; // Out parameter
