@@ -13,6 +13,7 @@
 UTankTrack::UTankTrack()
 {
 	PrimaryComponentTick.bCanEverTick = true;
+	SetNotifyRigidBodyCollision(true);
 
 #ifdef WORKAROUND
 	// We simply use the Engine Cone Basic Shape
@@ -28,6 +29,17 @@ UTankTrack::UTankTrack()
 #endif
 }
 
+void UTankTrack::BeginPlay() {
+	Super::BeginPlay();
+		
+	OnComponentHit.AddDynamic(this, &UTankTrack::OnHit);
+}
+
+void UTankTrack::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit) {
+
+	UE_LOG(LogTemp, Warning, TEXT("I'm hit, I'm hit !"));
+}
+
 void UTankTrack::TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) {
 	
 	// TODO add: Super::TickComponent(DeltaTime);
@@ -40,7 +52,7 @@ void UTankTrack::TickComponent(float DeltaTime, enum ELevelTick TickType, FActor
 	// Calculate and apply sideways force ( F = m a )
 	auto TankRoot = Cast<UStaticMeshComponent>(GetOwner()->GetRootComponent());
 	auto CorrectionForce = (TankRoot->GetMass() * CorrectionAcceleration) / 2; // two tracks
-	UE_LOG(LogTemp, Warning, TEXT("Correction force: %s"), *CorrectionForce.ToString());
+	//UE_LOG(LogTemp, Warning, TEXT("Correction force: %s"), *CorrectionForce.ToString());
 	TankRoot->AddForce(CorrectionForce);
 }
 

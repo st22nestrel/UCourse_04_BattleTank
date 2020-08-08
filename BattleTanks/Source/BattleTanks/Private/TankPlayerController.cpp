@@ -16,12 +16,12 @@ void ATankPlayerController::BeginPlay(){
 		UE_LOG(LogTemp, Warning, TEXT("Player controller can't find aiming component at Begin Play") );
 	}
 }
+
 void ATankPlayerController::Tick(float DeltaTime) {
 	Super::Tick(DeltaTime);
 	AimTowardsCrosshair();
 	//UE_LOG(LogTemp, Warning, TEXT("Ticking"));
 }
-
 
 // TODO maybe find a way to asign this just via blueprint
 void ATankPlayerController::AimLock() {
