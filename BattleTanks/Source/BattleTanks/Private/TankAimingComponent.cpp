@@ -37,7 +37,6 @@ void UTankAimingComponent::BeginPlay()
 
 void UTankAimingComponent::TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) {
 
-
 	if ((GetWorld()->GetTimeSeconds() - LastFireTime) < ReloadTime) {
 		FiringStatus = EFiringStatus::Reloading;
 	}
@@ -48,7 +47,6 @@ void UTankAimingComponent::TickComponent(float DeltaTime, enum ELevelTick TickTy
 		FiringStatus = EFiringStatus::Locked;
 	}
 
-	UE_LOG(LogTemp, Warning, TEXT("Aiming Comp. ticking"));
 }
 
 bool UTankAimingComponent::IsBarrelMoving() {

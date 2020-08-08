@@ -12,6 +12,8 @@
  */
 UTankTrack::UTankTrack()
 {
+	PrimaryComponentTick.bCanEverTick = true;
+
 #ifdef WORKAROUND
 	// We simply use the Engine Cone Basic Shape
 	static ConstructorHelpers::FObjectFinder<UStaticMesh>SM_Track(TEXT("/Game/TankParts/tank_fbx_Track"));
@@ -26,6 +28,21 @@ UTankTrack::UTankTrack()
 #endif
 }
 
+void UTankTrack::TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) {
+	
+	// TODO add: Super::TickComponent(DeltaTime);
+
+	// Calculate the SlippageSpeed
+	float SlippageSpeed = FVector::DotProduct(GetRightVector(), GetComponentVelocity()); // x*velocity of track
+	// Work-out the required acceleration this fram to correct
+	auto CorrectionAcceleration = -SlippageSpeed / DeltaTime * GetRightVector();
+
+	// Calculate and apply sideways force ( F = m a )
+	auto TankRoot = Cast<UStaticMeshComponent>(GetOwner()->GetRootComponent());
+	auto CorrectionForce = (TankRoot->GetMass() * CorrectionAcceleration) / 2; // two tracks
+	UE_LOG(LogTemp, Warning, TEXT("Correction force: %s"), *CorrectionForce.ToString());
+	TankRoot->AddForce(CorrectionForce);
+}
 
 // TODO find better track movemnt
 void UTankTrack::SetThrottle(float Throttle) {

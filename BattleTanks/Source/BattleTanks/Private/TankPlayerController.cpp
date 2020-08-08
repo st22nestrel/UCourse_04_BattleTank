@@ -29,7 +29,7 @@ void ATankPlayerController::AimLock() {
 }
 
 void ATankPlayerController::AimTowardsCrosshair() {
-	if ( !ensure(GetPawn()) ) return;
+	if ( !ensure(GetPawn()) ) return; // e.g. if not possessing -> prevents PlayerController_BP crash
 	
 	if (!bAimLocked) {
 		FVector HitLocation; // Out parameter
