@@ -12,7 +12,8 @@ enum class EFiringStatus : uint8
 {
 	Reloading,
 	Aiming,
-	Locked
+	Locked,
+	OutOfAmmo
 };
 
 // Forward declaration
@@ -30,7 +31,7 @@ public:
 	UFUNCTION(BluePrintCallable, Category = "Setup")
 	void Initialise(UTankBarrel* BarrelToSet, UTankTurret* TurretToSet);
 
-	UFUNCTION(BlueprintCallable) //, Category = Firing -- not needed in newer Unreal versions
+	UFUNCTION(BlueprintCallable, Category = "Firing") //, Category = Firing -- not needed in newer Unreal versions
 	void Fire();
 
 	// Sets default values for this component's properties
@@ -41,6 +42,9 @@ public:
 	void MoveBarrelTowards(FVector AimDirection);
 
 	EFiringStatus GetFiringStatus()const;
+
+	UFUNCTION(BlueprintCallable, Category = "Firing")
+	int GetRoundsLeft()const;
 
 protected:
 	// Called when the game starts
@@ -74,5 +78,8 @@ private:
 	bool IsBarrelMoving();
 
 	FVector ThisAimDirection;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Firing")
+	int RoundsLeft = 2;
 	
 };
