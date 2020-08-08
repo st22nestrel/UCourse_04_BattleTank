@@ -39,6 +39,9 @@ void ATankPlayerController::AimTowardsCrosshair() {
 
 			// TODO Tell controlled tank to aim at this point
 		}
+		/*else{
+			AimingComponent->MoveBarrelTowards(-HitLocation.GetSafeNormal());
+		}*/
 	}
 }
 
@@ -53,10 +56,11 @@ bool ATankPlayerController::GetSightRayHitLocation(FVector& OutHitLocation) cons
 	FVector LookDirection;
 	if (GetLookDirection(ScreenLocation, LookDirection)) {
 		// Line-trace along that look direction, and see what we hit (up to max range)
-		if(GetLookVectorHitLocation(LookDirection, OutHitLocation)) return true;
+		return GetLookVectorHitLocation(LookDirection, OutHitLocation);
 	}
-	return true; // just always returns -> assigns given value to FVector& OutHitLocation
-				 // for our convenience
+
+	GetLookDirection(ScreenLocation, OutHitLocation);
+	return false;
 }
 
 bool ATankPlayerController::GetLookDirection(FVector2D ScreenLocation, FVector& LookDirection) const {
