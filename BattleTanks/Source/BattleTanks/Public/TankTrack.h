@@ -13,24 +13,28 @@ UCLASS(meta = (BlueprintSpawnableComponent))
 class BATTLETANKS_API UTankTrack : public UStaticMeshComponent
 {
 	GENERATED_BODY()
-	
+
 public:
 	UTankTrack();
 
 	UFUNCTION(BlueprintCallable, Category = "Input")
-	void SetThrottle(float Throttle);
+		void SetThrottle(float Throttle);
+
+	void DriveTrack();
 
 	// TODO always assign phys material in collision via BP, cause...
 	// + TODO make tank just one box collision rather
 	UPROPERTY(EditDefaultsOnly)
-	float TrackMaxDrivingForce = 40000000; // Assume 40 tonne tank, and 1g accelleration
+		float TrackMaxDrivingForce = 40000000; // Assume 40 tonne tank, and 1g accelleration
 
 
 private:
-	virtual void TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
-	
+	void ApplySidewaysForce();
+
 	virtual void BeginPlay() override; // virtual enables children of given class to be overriden
 
 	UFUNCTION()
 	void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit);
+
+	float CurrentThrottle = 0;
 };
