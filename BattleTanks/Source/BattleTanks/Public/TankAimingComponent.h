@@ -40,6 +40,8 @@ public:
 
 	void MoveBarrelTowards(FVector AimDirection);
 
+	EFiringStatus GetFiringStatus()const;
+
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
