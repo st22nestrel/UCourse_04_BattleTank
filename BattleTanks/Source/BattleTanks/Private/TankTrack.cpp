@@ -2,6 +2,7 @@
 
 
 #include "TankTrack.h"
+#include "Components/StaticMeshComponent.h"
 
 // Just switch workaround off by commenting this
 #define WORKAROUND
