@@ -9,9 +9,8 @@ ATank::ATank()
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
 
-	auto TankName = GetName();
-	UE_LOG(LogTemp, Warning, TEXT("%s DONKEY: Tank C++ Construct"), *TankName);
-
+	// it won't work here probably because of still not knowing about value set in BP
+	//CurrentHealth = StartingHealth;
 }
 
 float ATank::GetHealthPercent() const {
@@ -23,8 +22,7 @@ void ATank::BeginPlay()
 {
 	Super::BeginPlay(); // Needed for BP Begin Play to run!
 
-	auto TankName = GetName();
-	UE_LOG(LogTemp, Warning, TEXT("%s DONKEY: Tank C++ Begin Play"), *TankName);
+	CurrentHealth = StartingHealth;
 
 }
 
