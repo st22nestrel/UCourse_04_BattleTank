@@ -14,6 +14,10 @@ ATank::ATank()
 
 }
 
+float ATank::GetHealthPercent() const {
+	return CurrentHealth / StartingHealth;
+}
+
 // Called when the game starts or when spawned
 void ATank::BeginPlay()
 {
@@ -27,6 +31,18 @@ void ATank::BeginPlay()
 // quite don't understand to what is the return value going, it could be a trash value by the fact that we decrease health in this method, or not?
 float  ATank::TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, AActor* DamageCauser)
 {
+	/* Ben's way... return type is incorrect.. idk why to do this
+	//
+	int32 DamagePoints = FPlatformMath::RoundToInt(DamageAmount);
+	int32 DamageToApply = FMath::Clamp(DamagePoints, 0, CurrentHealth);
+
+	CurrentHealth -= DamageToApply;
+	if (CurrentHealth <= 0)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Tank died"))
+	}
+	return DamageToApply;*/
+
 	float DamageToApply = DamageAmount; //FMath::Clamp<float>(DamageAmount, 0, CurrentHealth);
 	
 	if (CurrentHealth <= 0) {
