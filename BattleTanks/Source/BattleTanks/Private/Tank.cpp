@@ -24,4 +24,19 @@ void ATank::BeginPlay()
 
 }
 
+// quite don't understand to what is the return value going, it could be a trash value by the fact that we decrease health in this method, or not?
+float  ATank::TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, AActor* DamageCauser)
+{
+	float DamageToApply = DamageAmount; //FMath::Clamp<float>(DamageAmount, 0, CurrentHealth);
+	
+	if (CurrentHealth <= 0) {
+		UE_LOG(LogTemp, Warning, TEXT("Tank died"));
+	}
+	else {
+		UE_LOG(LogTemp, Warning, TEXT("Damage Ammount %f, Damage to apply: %f"), DamageAmount, DamageToApply);
+		CurrentHealth -= DamageToApply;
+		UE_LOG(LogTemp, Warning, TEXT("Health %f"), CurrentHealth);
+	}
 
+	return DamageToApply;
+}
