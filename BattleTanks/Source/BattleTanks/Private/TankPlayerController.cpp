@@ -3,6 +3,8 @@
 
 #include "TankPlayerController.h"
 #include "TankAimingComponent.h"
+#include "Tank.h"
+#include "GameFramework/PlayerController.h"
 
 void ATankPlayerController::BeginPlay(){
 	Super::BeginPlay();
@@ -15,6 +17,24 @@ void ATankPlayerController::BeginPlay(){
 	else {
 		UE_LOG(LogTemp, Warning, TEXT("Player controller can't find aiming component at Begin Play") );
 	}
+}
+
+void ATankPlayerController::SetPawn(APawn* InPawn)
+{
+	Super::SetPawn(InPawn);
+	if (InPawn)
+	{
+		auto PossessedTank = Cast<ATank>(InPawn);
+		if (!ensure(PossessedTank)) { return; }
+
+		// Subscribe our local method to the tank's death event
+		PossessedTank->OnDeath.AddDynamic(this, &ATankPlayerController::OnPossedTankDeath);
+	}
+}
+
+void ATankPlayerController::OnPossedTankDeath()
+{
+	StartSpectatingOnly();
 }
 
 void ATankPlayerController::Tick(float DeltaTime) {

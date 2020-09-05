@@ -56,4 +56,9 @@ private:
 
 	// Used for locking turret rotation via RMB
 	bool bAimLocked = false;
+
+	virtual void SetPawn(APawn* InPawn) override;
+
+	UFUNCTION()
+	void OnPossedTankDeath();
 };

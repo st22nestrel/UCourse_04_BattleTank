@@ -6,6 +6,8 @@
 #include "GameFramework/Pawn.h"
 #include "Tank.generated.h"
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FDeath);
+
 UCLASS()
 class BATTLETANKS_API ATank : public APawn
 {
@@ -17,6 +19,8 @@ public:
 
 	UFUNCTION(BluePrintPure, Category = "Health")
 	float GetHealthPercent() const;
+
+	FDeath OnDeath;
 
 protected:
 	// Called when the game starts or when spawned
